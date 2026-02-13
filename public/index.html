@@ -1,0 +1,157 @@
+<!-- public/index.html -->
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BangBotz-API - REST API untuk Bot WhatsApp</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>🤖 BangBotz-API</h1>
+      <p class="tagline">REST API Terlengkap untuk Bot WhatsApp Kamu!</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <h2>Kenapa BangBotz-API?</h2>
+      <div class="features">
+        <div class="feature">
+          <h3>⚡ Super Cepat</h3>
+          <p>Response time < 2 detik</p>
+        </div>
+        <div class="feature">
+          <h3>📦 Lengkap</h3>
+          <p>100+ Endpoint siap pakai</p>
+        </div>
+        <div class="feature">
+          <h3>💰 Terjangkau</h3>
+          <p>Mulai dari GRATIS!</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="endpoints">
+      <h2>📚 Kategori API</h2>
+      
+      <div class="category">
+        <h3>📥 Downloader</h3>
+        <div class="endpoint-list">
+          <span class="badge">YouTube</span>
+          <span class="badge">TikTok</span>
+          <span class="badge">Instagram</span>
+          <span class="badge">Facebook</span>
+          <span class="badge">Twitter</span>
+        </div>
+      </div>
+
+      <div class="category">
+        <h3>🤖 AI Assistant</h3>
+        <div class="endpoint-list">
+          <span class="badge">ChatGPT</span>
+          <span class="badge">Gemini</span>
+          <span class="badge">Bard</span>
+        </div>
+      </div>
+
+      <div class="category">
+        <h3>🛠️ Tools</h3>
+        <div class="endpoint-list">
+          <span class="badge">Short Link</span>
+          <span class="badge">QR Code</span>
+          <span class="badge">Translate</span>
+          <span class="badge">Sticker Maker</span>
+        </div>
+      </div>
+
+      <div class="category">
+        <h3>☪️ Islamic</h3>
+        <div class="endpoint-list">
+          <span class="badge">Al-Quran</span>
+          <span class="badge">Jadwal Sholat</span>
+          <span class="badge">Kisah Nabi</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="pricing">
+      <h2>💰 Pricing</h2>
+      <div class="pricing-cards">
+        <div class="pricing-card">
+          <h3>Free</h3>
+          <div class="price">Rp 0</div>
+          <ul>
+            <li>✅ 1.000 requests/bulan</li>
+            <li>✅ Akses semua endpoint</li>
+            <li>⚠️ Rate limit: 10/menit</li>
+            <li>❌ No priority support</li>
+          </ul>
+          <a href="https://wa.me/YOUR_NUMBER?text=Halo,%20mau%20daftar%20Free%20tier" class="btn">Daftar Gratis</a>
+        </div>
+
+        <div class="pricing-card premium">
+          <h3>Premium</h3>
+          <div class="price">Rp 50k<span>/bulan</span></div>
+          <ul>
+            <li>✅ 50.000 requests/bulan</li>
+            <li>✅ Akses semua endpoint</li>
+            <li>✅ Rate limit: 60/menit</li>
+            <li>✅ Priority support</li>
+          </ul>
+          <a href="https://wa.me/YOUR_NUMBER?text=Halo,%20mau%20upgrade%20Premium" class="btn btn-premium">Upgrade Premium</a>
+        </div>
+
+        <div class="pricing-card">
+          <h3>VIP</h3>
+          <div class="price">Rp 150k<span>/bulan</span></div>
+          <ul>
+            <li>✅ Unlimited requests</li>
+            <li>✅ Akses semua endpoint</li>
+            <li>✅ No rate limit</li>
+            <li>✅ 24/7 Priority support</li>
+          </ul>
+          <a href="https://wa.me/YOUR_NUMBER?text=Halo,%20mau%20upgrade%20VIP" class="btn">Upgrade VIP</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="docs">
+      <h2>📖 Dokumentasi</h2>
+      <div class="code-example">
+        <h3>Contoh Penggunaan:</h3>
+        <pre><code>// YouTube Downloader
+GET https://bangbotz-api.vercel.app/api/downloader/youtube?apikey=YOUR_KEY&url=YOUTUBE_URL
+
+// Response
+{
+  "status": true,
+  "creator": "BangBotz-API",
+  "data": {
+    "title": "Video Title",
+    "thumbnail": "...",
+    "downloadUrl": "...",
+    "quality": "720p"
+  }
+}</code></pre>
+      </div>
+      <a href="/docs" class="btn">Lihat Dokumentasi Lengkap</a>
+    </section>
+
+    <section class="contact">
+      <h2>📞 Kontak</h2>
+      <p>Punya pertanyaan? Hubungi kami!</p>
+      <div class="contact-links">
+        <a href="https://wa.me/YOUR_NUMBER" class="btn">💬 WhatsApp</a>
+        <a href="https://github.com/YOUR_GITHUB" class="btn">🔗 GitHub</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 BangBotz-API. Made with ❤️ in Indonesia</p>
+  </footer>
+</body>
+</html>
