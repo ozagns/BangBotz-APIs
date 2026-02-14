@@ -93,7 +93,7 @@
       width: 40px;
       height: 40px;
       border-radius: 50%;
-      background: linear-gradient(135deg, var(--accent-orange), var(--accent-light));
+      background: linear-gradient(135deg, #FF6B35, #F7931E);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -130,6 +130,7 @@
       cursor: pointer;
       font-weight: 600;
       transition: all 0.2s;
+      font-family: 'Inter', sans-serif;
     }
 
     .logout-btn:hover {
@@ -223,6 +224,12 @@
       color: #6B7280;
     }
 
+    .stat-footer a {
+      color: #FF6B35;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
     /* Progress Bar */
     .progress-bar {
       width: 100%;
@@ -273,6 +280,7 @@
       padding: 1rem 1.5rem;
       border-radius: 12px;
       margin-bottom: 1rem;
+      flex-wrap: wrap;
     }
 
     .api-key-text {
@@ -282,6 +290,7 @@
       color: #1F2937;
       overflow: hidden;
       text-overflow: ellipsis;
+      min-width: 200px;
     }
 
     .api-key-text.hidden {
@@ -300,6 +309,7 @@
       gap: 0.5rem;
       font-size: 0.875rem;
       font-weight: 600;
+      font-family: 'Inter', sans-serif;
     }
 
     .btn-icon:hover {
@@ -360,18 +370,6 @@
       font-family: 'Fira Code', monospace;
     }
 
-    .status-badge {
-      padding: 0.25rem 0.75rem;
-      border-radius: 6px;
-      font-size: 0.75rem;
-      font-weight: 600;
-    }
-
-    .status-success {
-      background: #D1FAE5;
-      color: #065F46;
-    }
-
     /* Empty State */
     .empty-state {
       text-align: center;
@@ -412,8 +410,13 @@
       border-radius: 12px;
       margin-bottom: 1.5rem;
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       gap: 0.75rem;
+    }
+
+    .alert svg {
+      flex-shrink: 0;
+      margin-top: 2px;
     }
 
     .alert-success {
@@ -426,6 +429,16 @@
       background: #FEF3C7;
       border: 1px solid #F59E0B;
       color: #92400E;
+    }
+
+    .alert strong {
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+
+    .alert p {
+      margin: 0;
+      font-size: 0.9375rem;
     }
 
     /* Responsive */
@@ -442,6 +455,10 @@
 
       .main-content {
         margin-left: 0;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -573,7 +590,7 @@
               </div>
             </div>
             <div class="stat-footer">
-              <a href="/#pricing" style="color: var(--accent-orange); font-weight: 600;">Upgrade Plan →</a>
+              <a href="/#pricing">Upgrade Plan →</a>
             </div>
           </div>
         </div>
@@ -585,7 +602,7 @@
           </div>
 
           <div class="api-key-display">
-            <div class="api-key-text" id="api-key-display">••••••••••••••••••••••••••••••••</div>
+            <div class="api-key-text hidden" id="api-key-display">••••••••••••••••••••••••••••••••</div>
             <button class="btn-icon" onclick="toggleKeyVisibility()">
               <svg id="eye-icon" width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
@@ -612,7 +629,7 @@
         <!-- Request History -->
         <div class="card">
           <div class="card-header">
-            <h2 class="card-title">Recent Requests</h2>
+            <h2 class="card-title">Endpoint Usage</h2>
           </div>
 
           <div class="table-container" id="history-container">
@@ -636,7 +653,7 @@
     // Check auth
     const token = localStorage.getItem('token');
     if (!token) {
-      window.location.href = '/login.html';
+      window.location.href = '/login';
     }
 
     // Load dashboard data
@@ -651,7 +668,7 @@
         if (!response.ok) {
           if (response.status === 401) {
             localStorage.clear();
-            window.location.href = '/login.html';
+            window.location.href = '/login';
             return;
           }
           throw new Error('Failed to load dashboard');
@@ -667,7 +684,7 @@
 
       } catch (error) {
         console.error('Dashboard error:', error);
-        alert('Failed to load dashboard. Please try again.');
+        document.getElementById('loading').innerHTML = '<p style="color: #EF4444;">Failed to load dashboard. Please try refreshing the page.</p>';
       }
     }
 
@@ -774,7 +791,7 @@
         await navigator.clipboard.writeText(apiKey);
         alert('API key copied to clipboard!');
       } catch (error) {
-        alert('Failed to copy. Please copy manually.');
+        prompt('Copy this API key:', apiKey);
       }
     }
 
@@ -796,10 +813,10 @@
         const data = await response.json();
         
         document.getElementById('api-key-display').dataset.key = data.data.apikey;
-        alert('API key regenerated successfully! Old key: ' + data.data.oldApikey);
+        alert('API key regenerated successfully!\n\nOld key: ' + data.data.oldApikey + '\nNew key: ' + data.data.apikey);
         
         // Update local storage
-        const user = JSON.parse(localStorage.getItem('user'));
+        const user = JSON.parse(localStorage.getItem('user') || '{}');
         user.apikey = data.data.apikey;
         localStorage.setItem('user', JSON.stringify(user));
         
@@ -813,8 +830,10 @@
     }
 
     function logout() {
-      localStorage.clear();
-      window.location.href = '/login.html';
+      if (confirm('Are you sure you want to logout?')) {
+        localStorage.clear();
+        window.location.href = '/login';
+      }
     }
 
     // Load dashboard on page load
