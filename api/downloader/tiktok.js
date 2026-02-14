@@ -1,6 +1,6 @@
-// api/downloader/youtube.js
+// api/downloader/tiktok.js
 import { validateApiKey, checkRateLimit } from '../../lib/middleware.js';
-import { getYoutubeInfo } from '../../lib/scraper.js';
+import { getTikTokMedia } from '../../lib/scraper.js';
 
 export default async function handler(req, res) {
   const { apikey, url } = req.query;
@@ -30,20 +30,20 @@ export default async function handler(req, res) {
     return res.status(400).json({
       status: false,
       message: 'Parameter "url" is required',
-      example: '/api/downloader/youtube?apikey=YOUR_KEY&url=https://youtube.com/watch?v=xxx'
+      example: '/api/downloader/tiktok?apikey=YOUR_KEY&url=https://www.tiktok.com/@username/video/xxx'
     });
   }
 
-  // Check if valid YouTube URL
-  if (!url.includes('youtube.com') && !url.includes('youtu.be')) {
+  // Check if valid TikTok URL
+  if (!url.includes('tiktok.com')) {
     return res.status(400).json({
       status: false,
-      message: 'Invalid YouTube URL'
+      message: 'Invalid TikTok URL'
     });
   }
 
   try {
-    const result = await getYoutubeInfo(url);
+    const result = await getTikTokMedia(url);
 
     res.status(200).json({
       status: true,
@@ -56,10 +56,10 @@ export default async function handler(req, res) {
       }
     });
   } catch (error) {
-    console.error('YouTube API error:', error);
+    console.error('TikTok API error:', error);
     res.status(500).json({
       status: false,
-      message: error.message || 'Failed to process YouTube URL'
+      message: error.message || 'Failed to process TikTok URL'
     });
   }
 }
