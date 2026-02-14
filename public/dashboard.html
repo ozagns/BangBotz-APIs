@@ -4,11 +4,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard - BangBotz-API</title>
-  <link rel="stylesheet" href="/style.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
   <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     body {
-      background: var(--bg-cream);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #F5F1E8;
+      color: #1F2937;
+      line-height: 1.6;
     }
 
     .dashboard-container {
@@ -19,7 +27,7 @@
 
     /* Sidebar */
     .sidebar {
-      background: var(--primary-dark);
+      background: #0D4B4B;
       color: white;
       padding: 2rem 1.5rem;
       position: fixed;
@@ -85,7 +93,7 @@
       width: 40px;
       height: 40px;
       border-radius: 50%;
-      background: linear-gradient(135deg, var(--accent-orange), var(--accent-light));
+      background: linear-gradient(135deg, #FF6B35, #F7931E);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -122,6 +130,7 @@
       cursor: pointer;
       font-weight: 600;
       transition: all 0.2s;
+      font-family: 'Inter', sans-serif;
     }
 
     .logout-btn:hover {
@@ -141,12 +150,12 @@
     .page-title {
       font-size: 2rem;
       font-weight: 800;
-      color: var(--text-dark);
+      color: #1F2937;
       margin-bottom: 0.5rem;
     }
 
     .page-subtitle {
-      color: var(--text-gray);
+      color: #6B7280;
     }
 
     /* Stats Grid */
@@ -182,12 +191,12 @@
 
     .stat-icon.orange {
       background: rgba(255, 107, 53, 0.1);
-      color: var(--accent-orange);
+      color: #FF6B35;
     }
 
     .stat-icon.green {
       background: rgba(16, 185, 129, 0.1);
-      color: var(--success);
+      color: #10B981;
     }
 
     .stat-icon.blue {
@@ -197,29 +206,35 @@
 
     .stat-label {
       font-size: 0.875rem;
-      color: var(--text-gray);
+      color: #6B7280;
       margin-bottom: 0.5rem;
     }
 
     .stat-value {
       font-size: 2rem;
       font-weight: 800;
-      color: var(--text-dark);
+      color: #1F2937;
     }
 
     .stat-footer {
       margin-top: 1rem;
       padding-top: 1rem;
-      border-top: 1px solid var(--border);
+      border-top: 1px solid #E5E7EB;
       font-size: 0.875rem;
-      color: var(--text-gray);
+      color: #6B7280;
+    }
+
+    .stat-footer a {
+      color: #FF6B35;
+      font-weight: 600;
+      text-decoration: none;
     }
 
     /* Progress Bar */
     .progress-bar {
       width: 100%;
       height: 8px;
-      background: var(--bg-cream);
+      background: #F5F1E8;
       border-radius: 100px;
       overflow: hidden;
       margin: 1rem 0;
@@ -227,7 +242,7 @@
 
     .progress-fill {
       height: 100%;
-      background: linear-gradient(90deg, var(--accent-orange), var(--accent-light));
+      background: linear-gradient(90deg, #FF6B35, #F7931E);
       border-radius: 100px;
       transition: width 0.3s;
     }
@@ -247,13 +262,13 @@
       align-items: center;
       margin-bottom: 1.5rem;
       padding-bottom: 1rem;
-      border-bottom: 2px solid var(--border);
+      border-bottom: 2px solid #E5E7EB;
     }
 
     .card-title {
       font-size: 1.25rem;
       font-weight: 700;
-      color: var(--text-dark);
+      color: #1F2937;
     }
 
     /* API Key Section */
@@ -261,19 +276,21 @@
       display: flex;
       align-items: center;
       gap: 1rem;
-      background: var(--bg-cream);
+      background: #F5F1E8;
       padding: 1rem 1.5rem;
       border-radius: 12px;
       margin-bottom: 1rem;
+      flex-wrap: wrap;
     }
 
     .api-key-text {
       flex: 1;
       font-family: 'Fira Code', monospace;
       font-size: 0.9375rem;
-      color: var(--text-dark);
+      color: #1F2937;
       overflow: hidden;
       text-overflow: ellipsis;
+      min-width: 200px;
     }
 
     .api-key-text.hidden {
@@ -282,7 +299,7 @@
 
     .btn-icon {
       background: white;
-      border: 1px solid var(--border);
+      border: 1px solid #E5E7EB;
       padding: 0.5rem 0.75rem;
       border-radius: 8px;
       cursor: pointer;
@@ -292,11 +309,12 @@
       gap: 0.5rem;
       font-size: 0.875rem;
       font-weight: 600;
+      font-family: 'Inter', sans-serif;
     }
 
     .btn-icon:hover {
-      border-color: var(--accent-orange);
-      color: var(--accent-orange);
+      border-color: #FF6B35;
+      color: #FF6B35;
     }
 
     .btn-danger {
@@ -320,14 +338,14 @@
     }
 
     .data-table thead {
-      background: var(--bg-cream);
+      background: #F5F1E8;
     }
 
     .data-table th {
       padding: 1rem;
       text-align: left;
       font-weight: 600;
-      color: var(--text-dark);
+      color: #1F2937;
       font-size: 0.875rem;
       text-transform: uppercase;
       letter-spacing: 0.5px;
@@ -335,16 +353,16 @@
 
     .data-table td {
       padding: 1rem;
-      border-bottom: 1px solid var(--border);
-      color: var(--text-gray);
+      border-bottom: 1px solid #E5E7EB;
+      color: #6B7280;
     }
 
     .data-table tbody tr:hover {
-      background: var(--bg-cream);
+      background: #F5F1E8;
     }
 
     .endpoint-badge {
-      background: var(--primary-dark);
+      background: #0D4B4B;
       color: white;
       padding: 0.25rem 0.75rem;
       border-radius: 6px;
@@ -352,23 +370,11 @@
       font-family: 'Fira Code', monospace;
     }
 
-    .status-badge {
-      padding: 0.25rem 0.75rem;
-      border-radius: 6px;
-      font-size: 0.75rem;
-      font-weight: 600;
-    }
-
-    .status-success {
-      background: #D1FAE5;
-      color: #065F46;
-    }
-
     /* Empty State */
     .empty-state {
       text-align: center;
       padding: 3rem 1rem;
-      color: var(--text-gray);
+      color: #6B7280;
     }
 
     .empty-state svg {
@@ -388,8 +394,8 @@
     .spinner {
       width: 40px;
       height: 40px;
-      border: 4px solid var(--border);
-      border-top-color: var(--accent-orange);
+      border: 4px solid #E5E7EB;
+      border-top-color: #FF6B35;
       border-radius: 50%;
       animation: spin 0.8s linear infinite;
     }
@@ -404,8 +410,13 @@
       border-radius: 12px;
       margin-bottom: 1.5rem;
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       gap: 0.75rem;
+    }
+
+    .alert svg {
+      flex-shrink: 0;
+      margin-top: 2px;
     }
 
     .alert-success {
@@ -418,6 +429,16 @@
       background: #FEF3C7;
       border: 1px solid #F59E0B;
       color: #92400E;
+    }
+
+    .alert strong {
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+
+    .alert p {
+      margin: 0;
+      font-size: 0.9375rem;
     }
 
     /* Responsive */
@@ -434,6 +455,10 @@
 
       .main-content {
         margin-left: 0;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -469,7 +494,7 @@
           </a>
         </li>
         <li>
-          <a href="/docs.html">
+          <a href="/docs">
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
             </svg>
@@ -565,7 +590,7 @@
               </div>
             </div>
             <div class="stat-footer">
-              <a href="/#pricing" style="color: var(--accent-orange); font-weight: 600;">Upgrade Plan →</a>
+              <a href="/#pricing">Upgrade Plan →</a>
             </div>
           </div>
         </div>
@@ -577,7 +602,7 @@
           </div>
 
           <div class="api-key-display">
-            <div class="api-key-text" id="api-key-display">••••••••••••••••••••••••••••••••</div>
+            <div class="api-key-text hidden" id="api-key-display">••••••••••••••••••••••••••••••••</div>
             <button class="btn-icon" onclick="toggleKeyVisibility()">
               <svg id="eye-icon" width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
@@ -604,7 +629,7 @@
         <!-- Request History -->
         <div class="card">
           <div class="card-header">
-            <h2 class="card-title">Recent Requests</h2>
+            <h2 class="card-title">Endpoint Usage</h2>
           </div>
 
           <div class="table-container" id="history-container">
@@ -628,13 +653,13 @@
     // Check auth
     const token = localStorage.getItem('token');
     if (!token) {
-      window.location.href = '/login.html';
+      window.location.href = '/login';
     }
 
     // Load dashboard data
     async function loadDashboard() {
       try {
-        const response = await fetch(`${API_URL}/api/dashboard/stats`, {
+        const response = await fetch(`${API_URL}/api/dashboard`, {
           headers: {
             'Authorization': `Bearer ${token}`
           }
@@ -643,7 +668,7 @@
         if (!response.ok) {
           if (response.status === 401) {
             localStorage.clear();
-            window.location.href = '/login.html';
+            window.location.href = '/login';
             return;
           }
           throw new Error('Failed to load dashboard');
@@ -659,7 +684,7 @@
 
       } catch (error) {
         console.error('Dashboard error:', error);
-        alert('Failed to load dashboard. Please try again.');
+        document.getElementById('loading').innerHTML = '<p style="color: #EF4444;">Failed to load dashboard. Please try refreshing the page.</p>';
       }
     }
 
@@ -766,7 +791,7 @@
         await navigator.clipboard.writeText(apiKey);
         alert('API key copied to clipboard!');
       } catch (error) {
-        alert('Failed to copy. Please copy manually.');
+        prompt('Copy this API key:', apiKey);
       }
     }
 
@@ -776,7 +801,7 @@
       }
 
       try {
-        const response = await fetch(`${API_URL}/api/dashboard/regenerate-key`, {
+        const response = await fetch(`${API_URL}/api/dashboard?action=regenerate`, {
           method: 'POST',
           headers: {
             'Authorization': `Bearer ${token}`
@@ -788,10 +813,10 @@
         const data = await response.json();
         
         document.getElementById('api-key-display').dataset.key = data.data.apikey;
-        alert('API key regenerated successfully! Old key: ' + data.data.oldApikey);
+        alert('API key regenerated successfully!\n\nOld key: ' + data.data.oldApikey + '\nNew key: ' + data.data.apikey);
         
         // Update local storage
-        const user = JSON.parse(localStorage.getItem('user'));
+        const user = JSON.parse(localStorage.getItem('user') || '{}');
         user.apikey = data.data.apikey;
         localStorage.setItem('user', JSON.stringify(user));
         
@@ -805,8 +830,10 @@
     }
 
     function logout() {
-      localStorage.clear();
-      window.location.href = '/login.html';
+      if (confirm('Are you sure you want to logout?')) {
+        localStorage.clear();
+        window.location.href = '/login';
+      }
     }
 
     // Load dashboard on page load
