@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>API Documentation - BangBotz-API</title>
+  <link rel="stylesheet" href="/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    .docs-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 8rem 2rem 4rem;
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 3rem;
+    }
+
+    .docs-sidebar {
+      position: sticky;
+      top: 100px;
+      height: fit-content;
+      background: white;
+      padding: 2rem;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+
+    .docs-sidebar h3 {
+      font-size: 1rem;
+      color: var(--text-dark);
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .docs-nav {
+      list-style: none;
+    }
+
+    .docs-nav li {
+      margin-bottom: 0.5rem;
+    }
+
+    .docs-nav a {
+      display: block;
+      color: var(--text-gray);
+      text-decoration: none;
+      padding: 0.5rem 0.75rem;
+      border-radius: 6px;
+      transition: all 0.2s;
+      font-size: 0.9375rem;
+    }
+
+    .docs-nav a:hover,
+    .docs-nav a.active {
+      background: var(--bg-cream);
+      color: var(--accent-orange);
+    }
+
+    .docs-content {
+      background: white;
+      padding: 3rem;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+
+    .docs-header {
+      margin-bottom: 3rem;
+      padding-bottom: 2rem;
+      border-bottom: 2px solid var(--border);
+    }
+
+    .docs-title {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--text-dark);
+      margin-bottom: 1rem;
+    }
+
+    .docs-subtitle {
+      font-size: 1.125rem;
+      color: var(--text-gray);
+      line-height: 1.6;
+    }
+
+    .docs-section {
+      margin-bottom: 4rem;
+      scroll-margin-top: 120px;
+    }
+
+    .section-title {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .section-title::before {
+      content: '#';
+      color: var(--accent-orange);
+    }
+
+    .section-desc {
+      color: var(--text-gray);
+      line-height: 1.7;
+      margin-bottom: 2rem;
+    }
+
+    .endpoint-card {
+      background: var(--bg-cream);
+      border-radius: 12px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      border-left: 4px solid var(--accent-orange);
+    }
+
+    .endpoint-method {
+      display: inline-block;
+      background: var(--success);
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.875rem;
+      margin-bottom: 1rem;
+    }
+
+    .endpoint-url {
+      font-family: 'Fira Code', monospace;
+      font-size: 1.125rem;
+      color: var(--text-dark);
+      margin-bottom: 1.5rem;
+      word-break: break-all;
+    }
+
+    .param-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .param-table th {
+      background: var(--primary-dark);
+      color: white;
+      padding: 1rem;
+      text-align: left;
+      font-weight: 600;
+    }
+
+    .param-table td {
+      padding: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .param-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .param-name {
+      font-family: 'Fira Code', monospace;
+      color: var(--accent-orange);
+      font-weight: 600;
+    }
+
+    .param-required {
+      background: #FEE2E2;
+      color: #991B1B;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .param-optional {
+      background: #DBEAFE;
+      color: #1E40AF;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .code-tabs {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .tab-btn {
+      background: var(--bg-cream);
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px 8px 0 0;
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--text-gray);
+      transition: all 0.2s;
+    }
+
+    .tab-btn.active {
+      background: var(--primary-dark);
+      color: white;
+    }
+
+    .code-block {
+      position: relative;
+      background: var(--primary-dark);
+      border-radius: 0 12px 12px 12px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      overflow-x: auto;
+    }
+
+    .code-block pre {
+      margin: 0;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.9375rem;
+      line-height: 1.6;
+      color: #D4D4D4;
+    }
+
+    .code-block code {
+      color: inherit;
+    }
+
+    .copy-btn {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.875rem;
+      transition: all 0.2s;
+    }
+
+    .copy-btn:hover {
+      background: rgba(255,255,255,0.2);
+    }
+
+    .copy-btn.copied {
+      background: var(--success);
+      border-color: var(--success);
+    }
+
+    .response-example {
+      background: #F9FAFB;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem;
+      margin: 1.5rem 0;
+    }
+
+    .response-title {
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .status-badge {
+      display: inline-block;
+      background: var(--success);
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 6px;
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
+
+    .status-badge.error {
+      background: #EF4444;
+    }
+
+    .info-box {
+      background: #DBEAFE;
+      border-left: 4px solid #3B82F6;
+      padding: 1.5rem;
+      border-radius: 8px;
+      margin: 2rem 0;
+    }
+
+    .info-box.warning {
+      background: #FEF3C7;
+      border-left-color: #F59E0B;
+    }
+
+    .info-box.success {
+      background: #D1FAE5;
+      border-left-color: #10B981;
+    }
+
+    .info-box h4 {
+      color: var(--text-dark);
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .info-box p {
+      color: var(--text-gray);
+      line-height: 1.6;
+    }
+
+    .quick-start-steps {
+      counter-reset: step;
+    }
+
+    .quick-start-steps li {
+      counter-increment: step;
+      margin-bottom: 1.5rem;
+      padding-left: 3rem;
+      position: relative;
+    }
+
+    .quick-start-steps li::before {
+      content: counter(step);
+      position: absolute;
+      left: 0;
+      top: 0;
+      background: linear-gradient(135deg, var(--accent-orange), var(--accent-light));
+      color: white;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+    }
+
+    @media (max-width: 1024px) {
+      .docs-container {
+        grid-template-columns: 1fr;
+      }
+
+      .docs-sidebar {
+        position: static;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar (sama seperti landing page) -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-brand">
+        <div class="logo-icon">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+            <rect width="32" height="32" rx="8" fill="url(#gradient)"/>
+            <path d="M16 8L20 12H12L16 8Z" fill="white"/>
+            <rect x="12" y="12" width="8" height="12" rx="2" fill="white"/>
+            <defs>
+              <linearGradient id="gradient" x1="0" y1="0" x2="32" y2="32">
+                <stop stop-color="#FF6B35"/>
+                <stop offset="1" stop-color="#F7931E"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <span class="brand-name">BangBotz API</span>
+      </div>
+      
+      <div class="nav-menu">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/docs" class="nav-link active">Docs</a>
+        <a href="/#pricing" class="nav-link">Pricing</a>
+      </div>
+
+      <div class="nav-actions">
+        <a href="https://wa.me/YOUR_NUMBER" class="btn-nav">Get API Key</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="docs-container">
+    <!-- Sidebar -->
+    <aside class="docs-sidebar">
+      <h3>Documentation</h3>
+      <ul class="docs-nav">
+        <li><a href="#quick-start" class="active">Quick Start</a></li>
+        <li><a href="#authentication">Authentication</a></li>
+        <li><a href="#rate-limits">Rate Limits</a></li>
+        <li><a href="#errors">Error Codes</a></li>
+      </ul>
+
+      <h3 style="margin-top: 2rem;">Endpoints</h3>
+      <ul class="docs-nav">
+        <li><a href="#youtube">YouTube Downloader</a></li>
+        <li><a href="#tiktok">TikTok Downloader</a></li>
+        <li><a href="#instagram">Instagram (Soon)</a></li>
+      </ul>
+
+      <h3 style="margin-top: 2rem;">Resources</h3>
+      <ul class="docs-nav">
+        <li><a href="#examples">Code Examples</a></li>
+        <li><a href="#sdks">SDKs & Libraries</a></li>
+        <li><a href="#postman">Postman Collection</a></li>
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="docs-content">
+      <div class="docs-header">
+        <h1 class="docs-title">API Documentation</h1>
+        <p class="docs-subtitle">
+          Complete guide untuk integrasi BangBotz-API ke bot WhatsApp kamu. 
+          Simple, cepat, tinggal copy-paste!
+        </p>
+      </div>
+
+      <!-- Quick Start -->
+      <section id="quick-start" class="docs-section">
+        <h2 class="section-title">Quick Start</h2>
+        <p class="section-desc">
+          Ikuti 3 langkah simple ini untuk mulai pakai API:
+        </p>
+
+        <ol class="quick-start-steps">
+          <li>
+            <strong>Dapatkan API Key</strong>
+            <p>Chat WhatsApp kami untuk mendapatkan API key gratis. Respon dalam 5 menit!</p>
+            <a href="https://wa.me/YOUR_NUMBER?text=Halo,%20mau%20API%20key%20gratis" class="btn-secondary" style="margin-top: 0.5rem;">
+              Chat WhatsApp
+            </a>
+          </li>
+
+          <li>
+            <strong>Test API Key</strong>
+            <p>Coba endpoint sederhana untuk memastikan API key kamu berfungsi:</p>
+            <div class="code-block">
+              <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+              <pre><code>curl "https://bangbotz-apis.vercel.app/api/test/apikey?apikey=YOUR_API_KEY"</code></pre>
+            </div>
+          </li>
+
+          <li>
+            <strong>Mulai Coding!</strong>
+            <p>Integrasikan ke bot kamu. Lihat <a href="#examples" style="color: var(--accent-orange);">code examples</a> di bawah.</p>
+          </li>
+        </ol>
+
+        <div class="info-box success">
+          <h4>✅ Pro Tip</h4>
+          <p>Simpan API key kamu di environment variable, jangan hardcode di code!</p>
+        </div>
+      </section>
+
+      <!-- Authentication -->
+      <section id="authentication" class="docs-section">
+        <h2 class="section-title">Authentication</h2>
+        <p class="section-desc">
+          Semua request harus include API key sebagai query parameter <code>apikey</code>.
+        </p>
+
+        <div class="code-block">
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <pre><code>GET https://bangbotz-apis.vercel.app/api/downloader/youtube?apikey=YOUR_API_KEY&url=...</code></pre>
+        </div>
+
+        <div class="info-box warning">
+          <h4>⚠️ Security Warning</h4>
+          <p>Jangan share API key kamu ke orang lain. Kalau bocor, segera regenerate di dashboard atau contact support.</p>
+        </div>
+      </section>
+
+      <!-- Rate Limits -->
+      <section id="rate-limits" class="docs-section">
+        <h2 class="section-title">Rate Limits</h2>
+        <p class="section-desc">
+          Rate limit berbeda per tier untuk menjaga stabilitas server:
+        </p>
+
+        <table class="param-table">
+          <thead>
+            <tr>
+              <th>Tier</th>
+              <th>Requests/Month</th>
+              <th>Requests/Minute</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Free</strong></td>
+              <td>1,000</td>
+              <td>10</td>
+            </tr>
+            <tr>
+              <td><strong>Premium</strong></td>
+              <td>50,000</td>
+              <td>60</td>
+            </tr>
+            <tr>
+              <td><strong>VIP</strong></td>
+              <td>Unlimited</td>
+              <td>No limit</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="info-box">
+          <h4>📊 Checking Your Quota</h4>
+          <p>Setiap response includes quota info di field <code>quota</code>. Monitor usage kamu real-time!</p>
+        </div>
+      </section>
+
+      <!-- Error Codes -->
+      <section id="errors" class="docs-section">
+        <h2 class="section-title">Error Codes</h2>
+        <p class="section-desc">
+          API menggunakan standard HTTP status codes:
+        </p>
+
+        <table class="param-table">
+          <thead>
+            <tr>
+              <th>Code</th>
+              <th>Meaning</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>200</code></td>
+              <td>Success</td>
+              <td>Request berhasil</td>
+            </tr>
+            <tr>
+              <td><code>400</code></td>
+              <td>Bad Request</td>
+              <td>Cek parameter yang dikirim</td>
+            </tr>
+            <tr>
+              <td><code>401</code></td>
+              <td>Unauthorized</td>
+              <td>API key invalid atau missing</td>
+            </tr>
+            <tr>
+              <td><code>429</code></td>
+              <td>Too Many Requests</td>
+              <td>Rate limit exceeded, tunggu sebentar</td>
+            </tr>
+            <tr>
+              <td><code>500</code></td>
+              <td>Server Error</td>
+              <td>Server issue, coba lagi atau contact support</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="response-example">
+          <div class="response-title">
+            <span class="status-badge error">401</span>
+            Error Response Example
+          </div>
+          <div class="code-block" style="margin: 0;">
+            <pre><code>{
+  "status": false,
+  "message": "Invalid API Key"
+}</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <!-- YouTube Endpoint -->
+      <section id="youtube" class="docs-section">
+        <h2 class="section-title">YouTube Downloader</h2>
+        <p class="section-desc">
+          Download video & audio dari YouTube dengan kualitas terbaik.
+        </p>
+
+        <div class="endpoint-card">
+          <span class="endpoint-method">GET</span>
+          <div class="endpoint-url">
+            /api/downloader/youtube
+          </div>
+
+          <h3 style="margin-bottom: 1rem;">Parameters</h3>
+          <table class="param-table">
+            <thead>
+              <tr>
+                <th>Parameter</th>
+                <th>Type</th>
+                <th>Required</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="param-name">apikey</span></td>
+                <td>string</td>
+                <td><span class="param-required">Required</span></td>
+                <td>Your API key</td>
+              </tr>
+              <tr>
+                <td><span class="param-name">url</span></td>
+                <td>string</td>
+                <td><span class="param-required">Required</span></td>
+                <td>YouTube video URL</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3 style="margin: 2rem 0 1rem;">Request Example</h3>
+          
+          <div class="code-tabs">
+            <button class="tab-btn active" onclick="switchTab(this, 'curl-yt')">cURL</button>
+            <button class="tab-btn" onclick="switchTab(this, 'js-yt')">JavaScript</button>
+            <button class="tab-btn" onclick="switchTab(this, 'python-yt')">Python</button>
+            <button class="tab-btn" onclick="switchTab(this, 'php-yt')">PHP</button>
+          </div>
+
+          <div id="curl-yt" class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <pre><code>curl "https://bangbotz-apis.vercel.app/api/downloader/youtube?apikey=bbz-xxx&url=https://youtube.com/watch?v=dQw4w9WgXcQ"</code></pre>
+          </div>
+
+          <div id="js-yt" class="code-block" style="display:none;">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <pre><code>const axios = require('axios');
+
+const apikey = 'bbz-xxx';
+const url = 'https://youtube.com/watch?v=dQw4w9WgXcQ';
+
+axios.get('https://bangbotz-apis.vercel.app/api/downloader/youtube', {
+  params: { apikey, url }
+})
+.then(response => {
+  console.log(response.data);
+  // Access video URL
+  const videoUrl = response.data.data.video.url;
+})
+.catch(error => {
+  console.error(error.response.data);
+});</code></pre>
+          </div>
+
+          <div id="python-yt" class="code-block" style="display:none;">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <pre><code>import requests
+
+apikey = 'bbz-xxx'
+url = 'https://youtube.com/watch?v=dQw4w9WgXcQ'
+
+response = requests.get(
+    'https://bangbotz-apis.vercel.app/api/downloader/youtube',
+    params={'apikey': apikey, 'url': url}
+)
+
+data = response.json()
+print(data)
+
+# Access video URL
+video_url = data['data']['video']['url']</code></pre>
+          </div>
+
+          <div id="php-yt" class="code-block" style="display:none;">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <pre><code>$apikey = 'bbz-xxx';
+$url = 'https://youtube.com/watch?v=dQw4w9WgXcQ';
+
+$response = file_get_contents(
+    'https://bangbotz-apis.vercel.app/api/downloader/youtube?' .
+    http_build_query([
+        'apikey' => $apikey,
+        'url' => $url
+    ])
+);
+
+$data = json_decode($response, true);
+print_r($data);
+
+// Access video URL
+$videoUrl = $data['data']['video']['url'];</code></pre>
+          </div>
+
+          <h3 style="margin: 2rem 0 1rem;">Response Example</h3>
+          <div class="response-example">
+            <div class="response-title">
+              <span class="status-badge">200</span>
+              Success Response
+            </div>
+            <div class="code-block" style="margin: 0;">
+              <pre><code>{
+  "status": true,
+  "creator": "BangBotz-API",
+  "data": {
+    "title": "Rick Astley - Never Gonna Give You Up",
+    "author": "Rick Astley",
+    "duration": "212",
+    "thumbnail": "https://i.ytimg.com/vi/dQw4w9WgXcQ/maxresdefault.jpg",
+    "views": "1400000000",
+    "description": "The official video for...",
+    "video": {
+      "quality": "720p",
+      "url": "https://rr3---sn-ab5l6n7l.googlevideo.com/...",
+      "size": "15728640"
+    },
+    "audio": {
+      "quality": "128kbps",
+      "url": "https://rr3---sn-ab5l6n7l.googlevideo.com/...",
+      "size": "3407872"
+    }
+  },
+  "quota": {
+    "used": 1,
+    "limit": 1000,
+    "remaining": 999
+  }
+}</code></pre>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TikTok Endpoint -->
+      <section id="tiktok" class="docs-section">
+        <h2 class="section-title">TikTok Downloader</h2>
+        <p class="section-desc">
+          Download TikTok video tanpa watermark, HD & SD quality.
+        </p>
+
+        <div class="endpoint-card">
+          <span class="endpoint-method">GET</span>
+          <div class="endpoint-url">
+            /api/downloader/tiktok
+          </div>
+
+          <h3 style="margin-bottom: 1rem;">Parameters</h3>
+          <table class="param-table">
+            <thead>
+              <tr>
+                <th>Parameter</th>
+                <th>Type</th>
+                <th>Required</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="param-name">apikey</span></td>
+                <td>string</td>
+                <td><span class="param-required">Required</span></td>
+                <td>Your API key</td>
+              </tr>
+              <tr>
+                <td><span class="param-name">url</span></td>
+                <td>string</td>
+                <td><span class="param-required">Required</span></td>
+                <td>TikTok video URL</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3 style="margin: 2rem 0 1rem;">Request Example</h3>
+          
+          <div class="code-tabs">
+            <button class="tab-btn active" onclick="switchTab(this, 'curl-tt')">cURL</button>
+            <button class="tab-btn" onclick="switchTab(this, 'js-tt')">JavaScript</button>
+            <button class="tab-btn" onclick="switchTab(this, 'python-tt')">Python</button>
+          </div>
+
+          <div id="curl-tt" class="code-block">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <pre><code>curl "https://bangbotz-apis.vercel.app/api/downloader/tiktok?apikey=bbz-xxx&url=https://www.tiktok.com/@user/video/123"</code></pre>
+          </div>
+
+          <div id="js-tt" class="code-block" style="display:none;">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <pre><code>const response = await fetch(
+  'https://bangbotz-apis.vercel.app/api/downloader/tiktok?' +
+  new URLSearchParams({
+    apikey: 'bbz-xxx',
+    url: 'https://www.tiktok.com/@user/video/123'
+  })
+);
+
+const data = await response.json();
+const videoHD = data.data.video.noWatermark;</code></pre>
+          </div>
+
+          <div id="python-tt" class="code-block" style="display:none;">
+            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            <pre><code>response = requests.get(
+    'https://bangbotz-apis.vercel.app/api/downloader/tiktok',
+    params={
+        'apikey': 'bbz-xxx',
+        'url': 'https://www.tiktok.com/@user/video/123'
+    }
+)
+
+data = response.json()
+video_hd = data['data']['video']['noWatermark']</code></pre>
+          </div>
+
+          <h3 style="margin: 2rem 0 1rem;">Response Example</h3>
+          <div class="response-example">
+            <div class="response-title">
+              <span class="status-badge">200</span>
+              Success Response
+            </div>
+            <div class="code-block" style="margin: 0;">
+              <pre><code>{
+  "status": true,
+  "creator": "BangBotz-API",
+  "data": {
+    "type": "video",
+    "title": "joinn #boxingmedan🥊",
+    "author": {
+      "username": "@cantikacacaaa",
+      "avatar": "https://..."
+    },
+    "video": {
+      "noWatermark": "https://...",
+      "watermark": "https://...",
+      "quality": {
+        "hd": "https://...",
+        "sd": "https://..."
+      }
+    },
+    "images": []
+  },
+  "quota": {
+    "used": 2,
+    "limit": 1000,
+    "remaining": 998
+  }
+}</code></pre>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Examples -->
+      <section id="examples" class="docs-section">
+        <h2 class="section-title">Integration Examples</h2>
+        <p class="section-desc">
+          Contoh integrasi ke berbagai platform bot WhatsApp:
+        </p>
+
+        <h3 style="margin: 2rem 0 1rem;">Baileys (Node.js)</h3>
+        <div class="code-block">
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <pre><code>const { default: makeWASocket } = require('@whiskeysockets/baileys');
+const axios = require('axios');
+
+// Handler untuk command !ytdl
+sock.ev.on('messages.upsert', async ({ messages }) => {
+  const msg = messages[0];
+  const text = msg.message?.conversation || '';
+  
+  if (text.startsWith('!ytdl ')) {
+    const url = text.replace('!ytdl ', '');
+    
+    // Hit API
+    const response = await axios.get('https://bangbotz-apis.vercel.app/api/downloader/youtube', {
+      params: {
+        apikey: process.env.BANGBOTZ_API_KEY,
+        url: url
+      }
+    });
+    
+    const data = response.data.data;
+    
+    // Send video
+    await sock.sendMessage(msg.key.remoteJid, {
+      video: { url: data.video.url },
+      caption: `✅ ${data.title}\n\n` +
+               `👤 ${data.author}\n` +
+               `⏱️ ${data.duration}s\n` +
+               `📊 ${data.views} views`
+    });
+  }
+});</code></pre>
+        </div>
+
+        <h3 style="margin: 2rem 0 1rem;">Python (yowsup)</h3>
+        <div class="code-block">
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <pre><code>import requests
+import os
+
+def handle_message(message):
+    if message.startswith('!ttdl '):
+        url = message.replace('!ttdl ', '')
+        
+        # Hit API
+        response = requests.get(
+            'https://bangbotz-apis.vercel.app/api/downloader/tiktok',
+            params={
+                'apikey': os.getenv('BANGBOTZ_API_KEY'),
+                'url': url
+            }
+        )
+        
+        data = response.json()['data']
+        
+        # Download & send video
+        video_url = data['video']['noWatermark']
+        send_video(video_url, caption=data['title'])</code></pre>
+        </div>
+      </section>
+
+      <!-- Postman -->
+      <section id="postman" class="docs-section">
+        <h2 class="section-title">Postman Collection</h2>
+        <p class="section-desc">
+          Import Postman collection untuk testing API lebih mudah:
+        </p>
+
+        <a href="#" class="btn-primary" style="display: inline-flex;">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" style="margin-right: 0.5rem;">
+            <path d="M10 12V4M10 12L7 9M10 12L13 9M3 16H17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Download Postman Collection
+        </a>
+
+        <div class="info-box" style="margin-top: 2rem;">
+          <h4>📘 Tutorial Postman</h4>
+          <p>
+            1. Import file JSON ke Postman<br>
+            2. Set environment variable <code>API_KEY</code><br>
+            3. Test endpoint langsung dari Postman!
+          </p>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Footer (sama seperti landing page) -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <div class="logo-icon">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+              <rect width="32" height="32" rx="8" fill="url(#gradient2)"/>
+              <path d="M16 8L20 12H12L16 8Z" fill="white"/>
+              <rect x="12" y="12" width="8" height="12" rx="2" fill="white"/>
+              <defs>
+                <linearGradient id="gradient2" x1="0" y1="0" x2="32" y2="32">
+                  <stop stop-color="#FF6B35"/>
+                  <stop offset="1" stop-color="#F7931E"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+          <span class="brand-name">BangBotz API</span>
+          <p class="footer-desc">REST API tercepat & terpercaya untuk Bot WhatsApp Indonesia.</p>
+        </div>
+
+        <div class="footer-links">
+          <div class="footer-column">
+            <h4>Product</h4>
+            <a href="/">Home</a>
+            <a href="/docs">Documentation</a>
+            <a href="/#pricing">Pricing</a>
+          </div>
+
+          <div class="footer-column">
+            <h4>Support</h4>
+            <a href="https://wa.me/YOUR_NUMBER">WhatsApp</a>
+            <a href="https://github.com/ozagns/BangBotz-APIs">GitHub</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 BangBotz-API. Made with ❤️ in Indonesia</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Copy code functionality
+    function copyCode(button) {
+      const codeBlock = button.nextElementSibling;
+      const code = codeBlock.textContent;
+      
+      navigator.clipboard.writeText(code).then(() => {
+        button.textContent = 'Copied!';
+        button.classList.add('copied');
+        
+        setTimeout(() => {
+          button.textContent = 'Copy';
+          button.classList.remove('copied');
+        }, 2000);
+      });
+    }
+
+    // Tab switching
+    function switchTab(button, targetId) {
+      // Get parent tabs container
+      const tabsContainer = button.parentElement;
+      const contentContainer = tabsContainer.nextElementSibling.parentElement;
+      
+      // Remove active from all tabs
+      tabsContainer.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      
+      // Hide all code blocks in this section
+      let currentElement = tabsContainer.nextElementSibling;
+      while (currentElement && currentElement.classList.contains('code-block')) {
+        currentElement.style.display = 'none';
+        currentElement = currentElement.nextElementSibling;
+      }
+      
+      // Show selected
+      button.classList.add('active');
+      document.getElementById(targetId).style.display = 'block';
+    }
+
+    // Smooth scroll for sidebar links
+    document.querySelectorAll('.docs-nav a').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        // Remove active from all
+        document.querySelectorAll('.docs-nav a').forEach(l => l.classList.remove('active'));
+        
+        // Add active to clicked
+        this.classList.add('active');
+        
+        // Scroll to section
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // Update active link on scroll
+    const sections = document.querySelectorAll('.docs-section');
+    const navLinks = document.querySelectorAll('.docs-nav a');
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+      
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        if (scrollY >= sectionTop - 200) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${current}`) {
+          link.classList.add('active');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
