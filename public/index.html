@@ -1,157 +1,421 @@
-<!-- public/index.html -->
 <!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BangBotz-API - REST API untuk Bot WhatsApp</title>
+  <title>BangBotz-API - Modern REST API Platform</title>
+  <meta name="description" content="Professional REST API for WhatsApp Bots - Fast, Reliable, Affordable">
   <link rel="stylesheet" href="/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-  <header>
-    <div class="container">
-      <h1>🤖 BangBotz-API</h1>
-      <p class="tagline">REST API Terlengkap untuk Bot WhatsApp Kamu!</p>
-    </div>
-  </header>
-
-  <main class="container">
-    <section class="hero">
-      <h2>Kenapa BangBotz-API?</h2>
-      <div class="features">
-        <div class="feature">
-          <h3>⚡ Super Cepat</h3>
-          <p>Response time < 2 detik</p>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-brand">
+        <div class="logo-icon">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+            <rect width="32" height="32" rx="8" fill="url(#gradient)"/>
+            <path d="M16 8L20 12H12L16 8Z" fill="white"/>
+            <rect x="12" y="12" width="8" height="12" rx="2" fill="white"/>
+            <defs>
+              <linearGradient id="gradient" x1="0" y1="0" x2="32" y2="32">
+                <stop stop-color="#FF6B35"/>
+                <stop offset="1" stop-color="#F7931E"/>
+              </linearGradient>
+            </defs>
+          </svg>
         </div>
-        <div class="feature">
-          <h3>📦 Lengkap</h3>
-          <p>100+ Endpoint siap pakai</p>
-        </div>
-        <div class="feature">
-          <h3>💰 Terjangkau</h3>
-          <p>Mulai dari GRATIS!</p>
-        </div>
+        <span class="brand-name">BangBotz API</span>
       </div>
-    </section>
-
-    <section class="endpoints">
-      <h2>📚 Kategori API</h2>
       
-      <div class="category">
-        <h3>📥 Downloader</h3>
-        <div class="endpoint-list">
-          <span class="badge">YouTube</span>
-          <span class="badge">TikTok</span>
-          <span class="badge">Instagram</span>
-          <span class="badge">Facebook</span>
-          <span class="badge">Twitter</span>
-        </div>
+      <div class="nav-menu">
+        <a href="#features" class="nav-link">Features</a>
+        <a href="#endpoints" class="nav-link">Endpoints</a>
+        <a href="#pricing" class="nav-link">Pricing</a>
+        <a href="#docs" class="nav-link">Docs</a>
       </div>
 
-      <div class="category">
-        <h3>🤖 AI Assistant</h3>
-        <div class="endpoint-list">
-          <span class="badge">ChatGPT</span>
-          <span class="badge">Gemini</span>
-          <span class="badge">Bard</span>
+      <div class="nav-actions">
+        <a href="https://wa.me/YOUR_NUMBER" class="btn-nav">Get API Key</a>
+        <button class="menu-toggle" onclick="toggleMenu()">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-container">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="badge-dot"></span>
+          All Systems Operational
+        </div>
+        <h1 class="hero-title">
+          Build Powerful<br/>
+          <span class="gradient-text">WhatsApp Bots</span><br/>
+          With Our API
+        </h1>
+        <p class="hero-subtitle">
+          Fast, reliable, and affordable REST API for YouTube, TikTok downloads and more. 
+          Start building your bot today with 1000 free requests.
+        </p>
+        <div class="hero-cta">
+          <a href="https://wa.me/YOUR_NUMBER?text=Halo,%20mau%20daftar%20BangBotz-API" class="btn-primary">
+            Start Free Trial
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+          <a href="#docs" class="btn-secondary">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M10 18C14.4183 18 18 14.4183 18 10C18 5.58172 14.4183 2 10 2C5.58172 2 2 5.58172 2 10C2 14.4183 5.58172 18 10 18Z" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M10 7V13M10 13L7 10M10 13L13 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            View Docs
+          </a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat">
+            <div class="stat-value">99.9%</div>
+            <div class="stat-label">Uptime</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">&lt;2s</div>
+            <div class="stat-label">Response Time</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">3+</div>
+            <div class="stat-label">Endpoints</div>
+          </div>
         </div>
       </div>
+      
+      <div class="hero-visual">
+        <div class="floating-card card-1">
+          <div class="card-header">
+            <div class="card-icon youtube">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+              </svg>
+            </div>
+            <span class="status-badge active">Active</span>
+          </div>
+          <div class="card-title">YouTube Downloader</div>
+          <div class="card-desc">720p HD • Audio Extract</div>
+        </div>
 
-      <div class="category">
-        <h3>🛠️ Tools</h3>
-        <div class="endpoint-list">
-          <span class="badge">Short Link</span>
-          <span class="badge">QR Code</span>
-          <span class="badge">Translate</span>
-          <span class="badge">Sticker Maker</span>
+        <div class="floating-card card-2">
+          <div class="card-header">
+            <div class="card-icon tiktok">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+                <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
+              </svg>
+            </div>
+            <span class="status-badge active">Active</span>
+          </div>
+          <div class="card-title">TikTok Downloader</div>
+          <div class="card-desc">No Watermark • HD Quality</div>
+        </div>
+
+        <div class="floating-card card-3">
+          <div class="card-header">
+            <div class="card-icon instagram">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/>
+              </svg>
+            </div>
+            <span class="status-badge maintenance">Soon</span>
+          </div>
+          <div class="card-title">Instagram Downloader</div>
+          <div class="card-desc">Coming Soon</div>
         </div>
       </div>
+    </div>
+  </section>
 
-      <div class="category">
-        <h3>☪️ Islamic</h3>
-        <div class="endpoint-list">
-          <span class="badge">Al-Quran</span>
-          <span class="badge">Jadwal Sholat</span>
-          <span class="badge">Kisah Nabi</span>
+  <!-- Features -->
+  <section class="features" id="features">
+    <div class="section-container">
+      <div class="section-header">
+        <h2 class="section-title">Why Choose BangBotz-API?</h2>
+        <p class="section-subtitle">Everything you need to build powerful WhatsApp bots</p>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+              <rect width="32" height="32" rx="8" fill="#FFF4ED"/>
+              <path d="M16 8L20 12L16 16L12 12L16 8Z" fill="#FF6B35"/>
+              <path d="M20 16L24 20L20 24L16 20L20 16Z" fill="#FF6B35" opacity="0.6"/>
+              <path d="M12 16L16 20L12 24L8 20L12 16Z" fill="#FF6B35" opacity="0.4"/>
+            </svg>
+          </div>
+          <h3 class="feature-title">Lightning Fast</h3>
+          <p class="feature-desc">Average response time under 2 seconds. Optimized servers ensure your bot never lags.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+              <rect width="32" height="32" rx="8" fill="#EBF5FF"/>
+              <circle cx="16" cy="16" r="8" stroke="#1E40AF" stroke-width="2" fill="none"/>
+              <circle cx="16" cy="16" r="3" fill="#1E40AF"/>
+            </svg>
+          </div>
+          <h3 class="feature-title">99.9% Uptime</h3>
+          <p class="feature-desc">Enterprise-grade infrastructure. Your API is always available when you need it.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+              <rect width="32" height="32" rx="8" fill="#F0FDF4"/>
+              <path d="M12 16L15 19L20 13" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="16" cy="16" r="10" stroke="#10B981" stroke-width="2" fill="none"/>
+            </svg>
+          </div>
+          <h3 class="feature-title">Simple Integration</h3>
+          <p class="feature-desc">RESTful API design. Get started in minutes with clear documentation.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+              <rect width="32" height="32" rx="8" fill="#FEF3C7"/>
+              <rect x="10" y="10" width="12" height="12" rx="2" stroke="#F59E0B" stroke-width="2" fill="none"/>
+              <path d="M16 14V18M16 18L14 16M16 18L18 16" stroke="#F59E0B" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3 class="feature-title">Affordable Pricing</h3>
+          <p class="feature-desc">Start free with 1000 requests/month. Scale as you grow with flexible plans.</p>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="pricing">
-      <h2>💰 Pricing</h2>
-      <div class="pricing-cards">
+  <!-- Endpoints -->
+  <section class="endpoints" id="endpoints">
+    <div class="section-container">
+      <div class="section-header">
+        <h2 class="section-title">Available Endpoints</h2>
+        <p class="section-subtitle">Production-ready APIs for your bot</p>
+      </div>
+
+      <div class="endpoints-list">
+        <div class="endpoint-card">
+          <div class="endpoint-header">
+            <div class="endpoint-icon youtube-bg">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+              </svg>
+            </div>
+            <span class="endpoint-status active">Active</span>
+          </div>
+          <h3 class="endpoint-title">YouTube Downloader</h3>
+          <p class="endpoint-desc">Download videos and extract audio with HD quality support</p>
+          <div class="endpoint-features">
+            <span class="feature-tag">720p HD</span>
+            <span class="feature-tag">Audio Extract</span>
+            <span class="feature-tag">Fast</span>
+          </div>
+          <code class="endpoint-url">GET /api/downloader/youtube</code>
+        </div>
+
+        <div class="endpoint-card">
+          <div class="endpoint-header">
+            <div class="endpoint-icon tiktok-bg">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+                <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
+              </svg>
+            </div>
+            <span class="endpoint-status active">Active</span>
+          </div>
+          <h3 class="endpoint-title">TikTok Downloader</h3>
+          <p class="endpoint-desc">Get TikTok videos without watermark in HD and SD quality</p>
+          <div class="endpoint-features">
+            <span class="feature-tag">No Watermark</span>
+            <span class="feature-tag">HD & SD</span>
+            <span class="feature-tag">Metadata</span>
+          </div>
+          <code class="endpoint-url">GET /api/downloader/tiktok</code>
+        </div>
+
+        <div class="endpoint-card disabled">
+          <div class="endpoint-header">
+            <div class="endpoint-icon instagram-bg">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/>
+              </svg>
+            </div>
+            <span class="endpoint-status maintenance">Maintenance</span>
+          </div>
+          <h3 class="endpoint-title">Instagram Downloader</h3>
+          <p class="endpoint-desc">Coming soon - Download Instagram posts and reels</p>
+          <div class="endpoint-features">
+            <span class="feature-tag">Coming Soon</span>
+          </div>
+          <code class="endpoint-url">GET /api/downloader/instagram</code>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section class="pricing" id="pricing">
+    <div class="section-container">
+      <div class="section-header">
+        <h2 class="section-title">Simple, Transparent Pricing</h2>
+        <p class="section-subtitle">Choose the plan that fits your needs</p>
+      </div>
+
+      <div class="pricing-grid">
         <div class="pricing-card">
-          <h3>Free</h3>
-          <div class="price">Rp 0</div>
-          <ul>
-            <li>✅ 1.000 requests/bulan</li>
-            <li>✅ Akses semua endpoint</li>
-            <li>⚠️ Rate limit: 10/menit</li>
-            <li>❌ No priority support</li>
+          <div class="pricing-header">
+            <h3 class="pricing-name">Free</h3>
+            <div class="pricing-price">
+              <span class="price-currency">Rp</span>
+              <span class="price-amount">0</span>
+              <span class="price-period">/month</span>
+            </div>
+            <p class="pricing-desc">Perfect for testing and small projects</p>
+          </div>
+          <ul class="pricing-features">
+            <li><span class="check">✓</span> 1,000 requests/month</li>
+            <li><span class="check">✓</span> All active endpoints</li>
+            <li><span class="check">✓</span> 10 requests/minute</li>
+            <li><span class="check">✓</span> Community support</li>
+            <li><span class="cross">×</span> Priority support</li>
           </ul>
-          <a href="https://wa.me/YOUR_NUMBER?text=Halo,%20mau%20daftar%20Free%20tier" class="btn">Daftar Gratis</a>
+          <a href="https://wa.me/628975800981?text=Halo,%20mau%20daftar%20Free%20tier" class="pricing-btn btn-outline">Get Started</a>
         </div>
 
-        <div class="pricing-card premium">
-          <h3>Premium</h3>
-          <div class="price">Rp 50k<span>/bulan</span></div>
-          <ul>
-            <li>✅ 50.000 requests/bulan</li>
-            <li>✅ Akses semua endpoint</li>
-            <li>✅ Rate limit: 60/menit</li>
-            <li>✅ Priority support</li>
+        <div class="pricing-card featured">
+          <div class="pricing-badge">Most Popular</div>
+          <div class="pricing-header">
+            <h3 class="pricing-name">Premium</h3>
+            <div class="pricing-price">
+              <span class="price-currency">Rp</span>
+              <span class="price-amount">50k</span>
+              <span class="price-period">/month</span>
+            </div>
+            <p class="pricing-desc">For growing bots and businesses</p>
+          </div>
+          <ul class="pricing-features">
+            <li><span class="check">✓</span> 50,000 requests/month</li>
+            <li><span class="check">✓</span> All active endpoints</li>
+            <li><span class="check">✓</span> 60 requests/minute</li>
+            <li><span class="check">✓</span> Priority support</li>
+            <li><span class="check">✓</span> Early access features</li>
           </ul>
-          <a href="https://wa.me/YOUR_NUMBER?text=Halo,%20mau%20upgrade%20Premium" class="btn btn-premium">Upgrade Premium</a>
+          <a href="https://wa.me/628975800981?text=Halo,%20mau%20upgrade%20Premium" class="pricing-btn btn-primary">Upgrade Now</a>
         </div>
 
         <div class="pricing-card">
-          <h3>VIP</h3>
-          <div class="price">Rp 150k<span>/bulan</span></div>
-          <ul>
-            <li>✅ Unlimited requests</li>
-            <li>✅ Akses semua endpoint</li>
-            <li>✅ No rate limit</li>
-            <li>✅ 24/7 Priority support</li>
+          <div class="pricing-header">
+            <h3 class="pricing-name">VIP</h3>
+            <div class="pricing-price">
+              <span class="price-currency">Rp</span>
+              <span class="price-amount">150k</span>
+              <span class="price-period">/month</span>
+            </div>
+            <p class="pricing-desc">For enterprise-level applications</p>
+          </div>
+          <ul class="pricing-features">
+            <li><span class="check">✓</span> Unlimited requests</li>
+            <li><span class="check">✓</span> All endpoints + Beta</li>
+            <li><span class="check">✓</span> No rate limits</li>
+            <li><span class="check">✓</span> 24/7 Priority support</li>
+            <li><span class="check">✓</span> Custom features</li>
           </ul>
-          <a href="https://wa.me/YOUR_NUMBER?text=Halo,%20mau%20upgrade%20VIP" class="btn">Upgrade VIP</a>
+          <a href="https://wa.me/628975800981?text=Halo,%20mau%20upgrade%20VIP" class="pricing-btn btn-outline">Contact Sales</a>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="docs">
-      <h2>📖 Dokumentasi</h2>
-      <div class="code-example">
-        <h3>Contoh Penggunaan:</h3>
-        <pre><code>// YouTube Downloader
-GET https://bangbotz-api.vercel.app/api/downloader/youtube?apikey=YOUR_KEY&url=YOUTUBE_URL
+  <!-- CTA -->
+  <section class="cta">
+    <div class="cta-container">
+      <h2 class="cta-title">Ready to Build Something Amazing?</h2>
+      <p class="cta-subtitle">Start using BangBotz-API today with 1,000 free requests</p>
+      <a href="https://wa.me/628975800981?text=Halo,%20mau%20daftar%20BangBotz-API" class="btn-primary btn-lg">
+        Get Your API Key Now
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+  </section>
 
-// Response
-{
-  "status": true,
-  "creator": "BangBotz-API",
-  "data": {
-    "title": "Video Title",
-    "thumbnail": "...",
-    "downloadUrl": "...",
-    "quality": "720p"
-  }
-}</code></pre>
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <div class="logo-icon">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+              <rect width="32" height="32" rx="8" fill="url(#gradient2)"/>
+              <path d="M16 8L20 12H12L16 8Z" fill="white"/>
+              <rect x="12" y="12" width="8" height="12" rx="2" fill="white"/>
+              <defs>
+                <linearGradient id="gradient2" x1="0" y1="0" x2="32" y2="32">
+                  <stop stop-color="#FF6B35"/>
+                  <stop offset="1" stop-color="#F7931E"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+          <span class="brand-name">BangBotz API</span>
+          <p class="footer-desc">Professional REST API platform for WhatsApp bots</p>
+        </div>
+
+        <div class="footer-links">
+          <div class="footer-column">
+            <h4>Product</h4>
+            <a href="#features">Features</a>
+            <a href="#endpoints">Endpoints</a>
+            <a href="#pricing">Pricing</a>
+            <a href="/api/info/status">Status</a>
+          </div>
+
+          <div class="footer-column">
+            <h4>Resources</h4>
+            <a href="#docs">Documentation</a>
+            <a href="https://github.com/ozagns/BangBotz-APIs">GitHub</a>
+            <a href="https://wa.me/628975800981">Support</a>
+          </div>
+
+          <div class="footer-column">
+            <h4>Connect</h4>
+            <a href="https://wa.me/628975800981">WhatsApp</a>
+            <a href="https://github.com/ozagns">GitHub</a>
+          </div>
+        </div>
       </div>
-      <a href="/docs" class="btn">Lihat Dokumentasi Lengkap</a>
-    </section>
 
-    <section class="contact">
-      <h2>📞 Kontak</h2>
-      <p>Punya pertanyaan? Hubungi kami!</p>
-      <div class="contact-links">
-        <a href="https://wa.me/YOUR_NUMBER" class="btn">💬 WhatsApp</a>
-        <a href="https://github.com/YOUR_GITHUB" class="btn">🔗 GitHub</a>
+      <div class="footer-bottom">
+        <p>&copy; 2026 BangBotz-API. All rights reserved.</p>
+        <div class="footer-legal">
+          <a href="#">Terms</a>
+          <a href="#">Privacy</a>
+        </div>
       </div>
-    </section>
-  </main>
-
-  <footer>
-    <p>&copy; 2025 BangBotz-API. Made with ❤️ in Indonesia</p>
+    </div>
   </footer>
+
+  <script>
+    function toggleMenu() {
+      const navbar = document.querySelector('.navbar');
+      navbar.classList.toggle('menu-open');
+    }
+  </script>
 </body>
 </html>
