@@ -634,7 +634,7 @@
     // Load dashboard data
     async function loadDashboard() {
       try {
-        const response = await fetch(`${API_URL}/api/dashboard/stats`, {
+        const response = await fetch(`${API_URL}/api/dashboard`, {
           headers: {
             'Authorization': `Bearer ${token}`
           }
@@ -776,7 +776,7 @@
       }
 
       try {
-        const response = await fetch(`${API_URL}/api/dashboard/regenerate-key`, {
+        const response = await fetch(`${API_URL}/api/dashboard?action=regenerate`, {
           method: 'POST',
           headers: {
             'Authorization': `Bearer ${token}`
