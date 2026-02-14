@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - BangBotz-API</title>
+  <link rel="stylesheet" href="/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    .auth-container {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--bg-cream) 0%, #FFF4ED 100%);
+      padding: 2rem;
+    }
+
+    .auth-box {
+      background: white;
+      padding: 3rem;
+      border-radius: 24px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+      max-width: 440px;
+      width: 100%;
+    }
+
+    .auth-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .auth-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .auth-logo .brand-name {
+      font-size: 1.5rem;
+      font-weight: 800;
+    }
+
+    .auth-title {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 0.5rem;
+    }
+
+    .auth-subtitle {
+      color: var(--text-gray);
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-label {
+      display: block;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 0.5rem;
+      font-size: 0.9375rem;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 0.875rem 1rem;
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      font-size: 1rem;
+      transition: all 0.2s;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: var(--accent-orange);
+      box-shadow: 0 0 0 4px rgba(255, 107, 53, 0.1);
+    }
+
+    .form-input.error {
+      border-color: #EF4444;
+    }
+
+    .error-message {
+      color: #EF4444;
+      font-size: 0.875rem;
+      margin-top: 0.5rem;
+      display: none;
+    }
+
+    .error-message.show {
+      display: block;
+    }
+
+    .btn-auth {
+      width: 100%;
+      background: linear-gradient(135deg, var(--accent-orange), var(--accent-light));
+      color: white;
+      padding: 1rem;
+      border: none;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      margin-top: 1rem;
+    }
+
+    .btn-auth:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(255, 107, 53, 0.4);
+    }
+
+    .btn-auth:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .auth-divider {
+      text-align: center;
+      margin: 2rem 0;
+      position: relative;
+    }
+
+    .auth-divider::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .auth-divider span {
+      background: white;
+      padding: 0 1rem;
+      position: relative;
+      color: var(--text-gray);
+      font-size: 0.875rem;
+    }
+
+    .auth-footer {
+      text-align: center;
+      margin-top: 2rem;
+      color: var(--text-gray);
+    }
+
+    .auth-footer a {
+      color: var(--accent-orange);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .auth-footer a:hover {
+      text-decoration: underline;
+    }
+
+    .success-message {
+      background: #D1FAE5;
+      border: 1px solid #10B981;
+      color: #065F46;
+      padding: 1rem;
+      border-radius: 12px;
+      margin-bottom: 1.5rem;
+      display: none;
+    }
+
+    .success-message.show {
+      display: block;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+      background: var(--bg-cream);
+      padding: 0.5rem;
+      border-radius: 12px;
+    }
+
+    .tab-btn {
+      flex: 1;
+      padding: 0.75rem;
+      background: transparent;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      color: var(--text-gray);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .tab-btn.active {
+      background: white;
+      color: var(--text-dark);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .loading {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 0.6s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <div class="auth-container">
+    <div class="auth-box">
+      <div class="auth-header">
+        <div class="auth-logo">
+          <div class="logo-icon">
+            <svg width="40" height="40" viewBox="0 0 32 32" fill="none">
+              <rect width="32" height="32" rx="8" fill="url(#gradient)"/>
+              <path d="M16 8L20 12H12L16 8Z" fill="white"/>
+              <rect x="12" y="12" width="8" height="12" rx="2" fill="white"/>
+              <defs>
+                <linearGradient id="gradient" x1="0" y1="0" x2="32" y2="32">
+                  <stop stop-color="#FF6B35"/>
+                  <stop offset="1" stop-color="#F7931E"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+          <span class="brand-name">BangBotz API</span>
+        </div>
+      </div>
+
+      <div class="tabs">
+        <button class="tab-btn active" onclick="switchAuthTab('login')">Login</button>
+        <button class="tab-btn" onclick="switchAuthTab('register')">Register</button>
+      </div>
+
+      <div id="success-alert" class="success-message"></div>
+      <div id="error-alert" class="error-message"></div>
+
+      <!-- Login Form -->
+      <div id="login-tab" class="tab-content active">
+        <h2 class="auth-title">Welcome Back!</h2>
+        <p class="auth-subtitle">Login to access your dashboard</p>
+
+        <form id="login-form" style="margin-top: 2rem;">
+          <div class="form-group">
+            <label class="form-label">Email or Username</label>
+            <input 
+              type="text" 
+              class="form-input" 
+              id="login-email"
+              placeholder="your@email.com"
+              required
+            >
+            <div class="error-message" id="login-email-error"></div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Password</label>
+            <input 
+              type="password" 
+              class="form-input" 
+              id="login-password"
+              placeholder="••••••••"
+              required
+            >
+            <div class="error-message" id="login-password-error"></div>
+          </div>
+
+          <button type="submit" class="btn-auth" id="login-btn">
+            Login
+          </button>
+        </form>
+
+        <div class="auth-footer">
+          Don't have an account? <a href="#" onclick="switchAuthTab('register')">Register here</a>
+        </div>
+      </div>
+
+      <!-- Register Form -->
+      <div id="register-tab" class="tab-content">
+        <h2 class="auth-title">Create Account</h2>
+        <p class="auth-subtitle">Start using BangBotz-API for free!</p>
+
+        <form id="register-form" style="margin-top: 2rem;">
+          <div class="form-group">
+            <label class="form-label">Username</label>
+            <input 
+              type="text" 
+              class="form-input" 
+              id="register-username"
+              placeholder="johndoe"
+              required
+            >
+            <div class="error-message" id="register-username-error"></div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Email</label>
+            <input 
+              type="email" 
+              class="form-input" 
+              id="register-email"
+              placeholder="your@email.com"
+              required
+            >
+            <div class="error-message" id="register-email-error"></div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Password</label>
+            <input 
+              type="password" 
+              class="form-input" 
+              id="register-password"
+              placeholder="Min. 6 characters"
+              required
+            >
+            <div class="error-message" id="register-password-error"></div>
+          </div>
+
+          <button type="submit" class="btn-auth" id="register-btn">
+            Create Account
+          </button>
+        </form>
+
+        <div class="auth-footer">
+          Already have an account? <a href="#" onclick="switchAuthTab('login')">Login here</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const API_URL = window.location.origin;
+
+    // Tab switching
+    function switchAuthTab(tab) {
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+      
+      if (tab === 'login') {
+        document.querySelector('.tab-btn:first-child').classList.add('active');
+        document.getElementById('login-tab').classList.add('active');
+      } else {
+        document.querySelector('.tab-btn:last-child').classList.add('active');
+        document.getElementById('register-tab').classList.add('active');
+      }
+      
+      clearMessages();
+    }
+
+    // Clear error messages
+    function clearMessages() {
+      document.querySelectorAll('.error-message').forEach(el => {
+        el.classList.remove('show');
+        el.textContent = '';
+      });
+      document.querySelectorAll('.form-input').forEach(el => {
+        el.classList.remove('error');
+      });
+      document.getElementById('success-alert').classList.remove('show');
+      document.getElementById('error-alert').classList.remove('show');
+    }
+
+    // Show error
+    function showError(fieldId, message) {
+      const field = document.getElementById(fieldId);
+      const errorEl = document.getElementById(fieldId + '-error');
+      
+      field.classList.add('error');
+      errorEl.textContent = message;
+      errorEl.classList.add('show');
+    }
+
+    // Show success
+    function showSuccess(message) {
+      const alert = document.getElementById('success-alert');
+      alert.textContent = message;
+      alert.classList.add('show');
+    }
+
+    // Show general error
+    function showGeneralError(message) {
+      const alert = document.getElementById('error-alert');
+      alert.textContent = message;
+      alert.classList.add('show');
+    }
+
+    // Login Form
+    document.getElementById('login-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      clearMessages();
+
+      const email = document.getElementById('login-email').value;
+      const password = document.getElementById('login-password').value;
+      const btn = document.getElementById('login-btn');
+
+      // Validation
+      if (!email) {
+        showError('login-email', 'Email is required');
+        return;
+      }
+
+      if (!password) {
+        showError('login-password', 'Password is required');
+        return;
+      }
+
+      // Submit
+      btn.disabled = true;
+      btn.innerHTML = '<span class="loading"></span> Logging in...';
+
+      try {
+        const response = await fetch(`${API_URL}/api/auth/login`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.message || 'Login failed');
+        }
+
+        // Save token
+        localStorage.setItem('token', data.data.token);
+        localStorage.setItem('user', JSON.stringify(data.data.user));
+
+        // Redirect to dashboard
+        showSuccess('Login successful! Redirecting...');
+        setTimeout(() => {
+          window.location.href = '/dashboard.html';
+        }, 1000);
+
+      } catch (error) {
+        showGeneralError(error.message);
+        btn.disabled = false;
+        btn.textContent = 'Login';
+      }
+    });
+
+    // Register Form
+    document.getElementById('register-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      clearMessages();
+
+      const username = document.getElementById('register-username').value;
+      const email = document.getElementById('register-email').value;
+      const password = document.getElementById('register-password').value;
+      const btn = document.getElementById('register-btn');
+
+      // Validation
+      if (!username) {
+        showError('register-username', 'Username is required');
+        return;
+      }
+
+      if (!email) {
+        showError('register-email', 'Email is required');
+        return;
+      }
+
+      if (!password) {
+        showError('register-password', 'Password is required');
+        return;
+      }
+
+      if (password.length < 6) {
+        showError('register-password', 'Password must be at least 6 characters');
+        return;
+      }
+
+      // Submit
+      btn.disabled = true;
+      btn.innerHTML = '<span class="loading"></span> Creating account...';
+
+      try {
+        const response = await fetch(`${API_URL}/api/auth/register`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username, email, password })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.message || 'Registration failed');
+        }
+
+        // Save token
+        localStorage.setItem('token', data.data.token);
+        localStorage.setItem('user', JSON.stringify(data.data.user));
+
+        // Redirect to dashboard
+        showSuccess('Account created! Redirecting to dashboard...');
+        setTimeout(() => {
+          window.location.href = '/dashboard.html';
+        }, 1500);
+
+      } catch (error) {
+        showGeneralError(error.message);
+        btn.disabled = false;
+        btn.textContent = 'Create Account';
+      }
+    });
+
+    // Check if already logged in
+    if (localStorage.getItem('token')) {
+      window.location.href = '/dashboard.html';
+    }
+  </script>
+</body>
+</html>
